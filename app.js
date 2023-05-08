@@ -6,7 +6,6 @@ const contactRouter = require("./routes/contact");
 const servicesRouter = require("./routes/services");
 const paymentRouter = require("./routes/payment");
 const loginRouter = require("./routes/login");
-// const secondPage = require("./secondPage.js");
 
 app.get("/", (request, response) => {
   // response.send(" Home Page");
