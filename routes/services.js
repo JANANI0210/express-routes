@@ -3,32 +3,26 @@ const servicesRouter = express.Router();
 
 let listOfservices = [
   {
-    id: 1,
     name: "Web Development",
   },
 
   {
-    id: 2,
     name: "Cloud Computing",
   },
 
   {
-    id: 3,
     name: "UI/UX Design",
   },
 
   {
-    id: 4,
     name: "Block Chain",
   },
 
   {
-    id: 5,
     name: "Digital Marketing",
   },
 
   {
-    id: 6,
     name: "Cyber Security",
   },
 ];
@@ -37,17 +31,26 @@ servicesRouter.get("/", (request, response) => {
   response.send("Services");
 });
 
-servicesRouter.get("/:id", (request, response) => {
-  const serviceId = Number(request.params.id);
-  const getService = listOfservices.find((service) => {
-    return service.id === serviceId;
-  });
+// servicesRouter.get("/:id", (request, response) => {
+//   const serviceId = Number(request.params.id);
+//   const getService = listOfservices.find((service) => {
+//     return service.id === serviceId;
+//   });
 
-  if (!getService) {
-    response.status(500).send("Expected service not found");
-    console.log(request.params.id);
-  } else {
-    response.json(getService);
-  }
+//   if (!getService) {
+//     response.status(500).send("Expected service not found");
+//     console.log(request.params.id);
+//   } else {
+//     response.json(getService);
+//   }
+// });
+
+servicesRouter.get("/:id([0-9]{1})", (request, response) => {
+  response.send(request.user.name);
+});
+
+servicesRouter.param("id", (request, response, next, id) => {
+  request.user = listOfservices[id - 1];
+  next();
 });
 module.exports = servicesRouter;
